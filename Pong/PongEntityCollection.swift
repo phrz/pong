@@ -17,11 +17,11 @@ class PongEntityCollection {
 		self.scene = scene
 	}
 	
-	func addEntity(entity: PongEntity, withName name: String) {
-		self.entities[name] = entity
-		let shapeEntity = entity as? PongShapeNodeProtocol
-		if let shapeNode = shapeEntity?.node {
-			self.scene.addChild(shapeNode)
+	func addEntity(entity: PongEntity) {
+		self.entities[entity.name] = entity
+		let spriteEntity = entity as? PongSpriteNodeProtocol
+		if let spriteNode = spriteEntity?.node {
+			self.scene.addChild(spriteNode)
 		}
 	}
 	
@@ -31,7 +31,7 @@ class PongEntityCollection {
 		}
 		set(newEntity) {
 			if let newEntity = newEntity {
-				self.addEntity(newEntity, withName: index)
+				self.addEntity(newEntity)
 			}
 		}
 	}

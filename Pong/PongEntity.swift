@@ -11,6 +11,12 @@ import SpriteKit
 
 class PongEntity {
 	
+	var name: String
+	
+	init(withName name: String) {
+		self.name = name
+	}
+	
 	func update(currentTime: NSTimeInterval, forScene scene: SKScene) {
 		// Do nothing
 	}

@@ -14,6 +14,10 @@ class PongScene: SKScene, SKPhysicsContactDelegate {
 	var keysDown = Set<UInt16>()
 	
 	override func didMoveToView(view: SKView) {
+		
+		self.name = "pongScene"
+		
+		// Appearance and scaling
 		self.backgroundColor = SKColor.blackColor()
 		self.scaleMode = .Fill
 		
@@ -32,8 +36,14 @@ class PongScene: SKScene, SKPhysicsContactDelegate {
 		self.physicsWorld.contactDelegate = self
 		self.physicsBody = borderBody
 		
+		// Physical properties
+		self.physicsBody?.dynamic = false
 		self.physicsBody?.friction = 0
+		self.physicsBody?.angularDamping = 0
+		self.physicsBody?.linearDamping = 0
+		self.physicsBody?.restitution = 0
 		
+		// Collision/contact rules
 		self.physicsBody?.categoryBitMask = PhysicsCategory.scene
 		self.physicsBody?.collisionBitMask = PhysicsCategory.paddle
 		self.physicsBody?.contactTestBitMask = PhysicsCategory.paddle
@@ -42,7 +52,6 @@ class PongScene: SKScene, SKPhysicsContactDelegate {
 	
 	override func keyDown(theEvent: NSEvent) {
 		keysDown.insert(theEvent.keyCode)
-		print(keysDown)
 		updateKeyMovement()
 	}
 	
@@ -50,7 +59,6 @@ class PongScene: SKScene, SKPhysicsContactDelegate {
 	override func keyUp(theEvent: NSEvent) {
 		let pongDelegate = self.delegate as! PongGame
 		keysDown.remove(theEvent.keyCode)
-		print(keysDown)
 		if keysDown.isEmpty {
 			pongDelegate.stopPlayerMovement()
 		}
@@ -59,13 +67,20 @@ class PongScene: SKScene, SKPhysicsContactDelegate {
 	
 	
 	func updateKeyMovement() {
-		
 		let pongDelegate = self.delegate as! PongGame
-		
 		if keysDown.contains(upKeyMapping) {
 			pongDelegate.startPlayerMovement(.Up)
 		} else if keysDown.contains(downKeyMapping) {
 			pongDelegate.startPlayerMovement(.Down)
 		}
+	}
+	
+	
+	func didBeginContact(contact: SKPhysicsContact) {
+		let pongDelegate = self.delegate as! PongGame
+		let bodyAName = contact.bodyA.node?.name
+		let bodyBName = contact.bodyB.node?.name
+		
+		pongDelegate.entitiesDidCollide(bodyAName!,bodyBName!,contact: contact)
 	}
 }
