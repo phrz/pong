@@ -8,20 +8,32 @@
 
 /* Begin PBXBuildFile section */
 		2715CE7E1CB4C4EA00F1C01D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2715CE7D1CB4C4EA00F1C01D /* AppDelegate.swift */; };
-		2715CE801CB4C4EA00F1C01D /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2715CE7F1CB4C4EA00F1C01D /* GameScene.swift */; };
-		2715CE821CB4C4EA00F1C01D /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 2715CE811CB4C4EA00F1C01D /* GameScene.sks */; };
+		2715CE821CB4C4EA00F1C01D /* PongScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 2715CE811CB4C4EA00F1C01D /* PongScene.sks */; };
 		2715CE841CB4C4EA00F1C01D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2715CE831CB4C4EA00F1C01D /* Assets.xcassets */; };
 		2715CE871CB4C4EA00F1C01D /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2715CE851CB4C4EA00F1C01D /* MainMenu.xib */; };
+		2715CE8F1CB4C56900F1C01D /* PongScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2715CE8E1CB4C56900F1C01D /* PongScene.swift */; };
+		2715CE911CB4C59400F1C01D /* PongShapeNodeProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2715CE901CB4C59400F1C01D /* PongShapeNodeProtocol.swift */; };
+		2715CE931CB4C59D00F1C01D /* PongPaddle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2715CE921CB4C59D00F1C01D /* PongPaddle.swift */; };
+		2715CE961CB4C5C400F1C01D /* PongEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2715CE941CB4C5C400F1C01D /* PongEntity.swift */; };
+		2715CE971CB4C5C400F1C01D /* PongEntityCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2715CE951CB4C5C400F1C01D /* PongEntityCollection.swift */; };
+		2715CE991CB4C60900F1C01D /* PongGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2715CE981CB4C60900F1C01D /* PongGame.swift */; };
+		2715CE9B1CB560CA00F1C01D /* PongDirectionProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2715CE9A1CB560CA00F1C01D /* PongDirectionProtocol.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		2715CE7A1CB4C4EA00F1C01D /* Pong.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Pong.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2715CE7D1CB4C4EA00F1C01D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		2715CE7F1CB4C4EA00F1C01D /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
-		2715CE811CB4C4EA00F1C01D /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
+		2715CE811CB4C4EA00F1C01D /* PongScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = PongScene.sks; sourceTree = "<group>"; };
 		2715CE831CB4C4EA00F1C01D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2715CE861CB4C4EA00F1C01D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		2715CE881CB4C4EA00F1C01D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2715CE8E1CB4C56900F1C01D /* PongScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PongScene.swift; sourceTree = "<group>"; };
+		2715CE901CB4C59400F1C01D /* PongShapeNodeProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PongShapeNodeProtocol.swift; sourceTree = "<group>"; };
+		2715CE921CB4C59D00F1C01D /* PongPaddle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PongPaddle.swift; sourceTree = "<group>"; };
+		2715CE941CB4C5C400F1C01D /* PongEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PongEntity.swift; sourceTree = "<group>"; };
+		2715CE951CB4C5C400F1C01D /* PongEntityCollection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PongEntityCollection.swift; sourceTree = "<group>"; };
+		2715CE981CB4C60900F1C01D /* PongGame.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PongGame.swift; sourceTree = "<group>"; };
+		2715CE9A1CB560CA00F1C01D /* PongDirectionProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PongDirectionProtocol.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,8 +67,14 @@
 			isa = PBXGroup;
 			children = (
 				2715CE7D1CB4C4EA00F1C01D /* AppDelegate.swift */,
-				2715CE7F1CB4C4EA00F1C01D /* GameScene.swift */,
-				2715CE811CB4C4EA00F1C01D /* GameScene.sks */,
+				2715CE8E1CB4C56900F1C01D /* PongScene.swift */,
+				2715CE941CB4C5C400F1C01D /* PongEntity.swift */,
+				2715CE981CB4C60900F1C01D /* PongGame.swift */,
+				2715CE951CB4C5C400F1C01D /* PongEntityCollection.swift */,
+				2715CE921CB4C59D00F1C01D /* PongPaddle.swift */,
+				2715CE901CB4C59400F1C01D /* PongShapeNodeProtocol.swift */,
+				2715CE9A1CB560CA00F1C01D /* PongDirectionProtocol.swift */,
+				2715CE811CB4C4EA00F1C01D /* PongScene.sks */,
 				2715CE831CB4C4EA00F1C01D /* Assets.xcassets */,
 				2715CE851CB4C4EA00F1C01D /* MainMenu.xib */,
 				2715CE881CB4C4EA00F1C01D /* Info.plist */,
@@ -123,7 +141,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2715CE841CB4C4EA00F1C01D /* Assets.xcassets in Resources */,
-				2715CE821CB4C4EA00F1C01D /* GameScene.sks in Resources */,
+				2715CE821CB4C4EA00F1C01D /* PongScene.sks in Resources */,
 				2715CE871CB4C4EA00F1C01D /* MainMenu.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -135,7 +153,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2715CE801CB4C4EA00F1C01D /* GameScene.swift in Sources */,
+				2715CE991CB4C60900F1C01D /* PongGame.swift in Sources */,
+				2715CE911CB4C59400F1C01D /* PongShapeNodeProtocol.swift in Sources */,
+				2715CE961CB4C5C400F1C01D /* PongEntity.swift in Sources */,
+				2715CE971CB4C5C400F1C01D /* PongEntityCollection.swift in Sources */,
+				2715CE931CB4C59D00F1C01D /* PongPaddle.swift in Sources */,
+				2715CE9B1CB560CA00F1C01D /* PongDirectionProtocol.swift in Sources */,
+				2715CE8F1CB4C56900F1C01D /* PongScene.swift in Sources */,
 				2715CE7E1CB4C4EA00F1C01D /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
