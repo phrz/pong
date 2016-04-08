@@ -18,7 +18,6 @@
 		2715CE971CB4C5C400F1C01D /* PongEntityCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2715CE951CB4C5C400F1C01D /* PongEntityCollection.swift */; };
 		2715CE991CB4C60900F1C01D /* PongGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2715CE981CB4C60900F1C01D /* PongGame.swift */; };
 		2715CE9B1CB560CA00F1C01D /* PongDirectionProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2715CE9A1CB560CA00F1C01D /* PongDirectionProtocol.swift */; };
-		2754BBD91CB80B4500513CC1 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 2754BBD81CB80B4500513CC1 /* .gitignore */; };
 		278C52F01CB5ACAB008A34FF /* PongBall.swift in Sources */ = {isa = PBXBuildFile; fileRef = 278C52EF1CB5ACAB008A34FF /* PongBall.swift */; };
 		278C52F21CB5B306008A34FF /* PongCollisionListenerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 278C52F11CB5B306008A34FF /* PongCollisionListenerProtocol.swift */; };
 /* End PBXBuildFile section */
@@ -37,7 +36,6 @@
 		2715CE951CB4C5C400F1C01D /* PongEntityCollection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PongEntityCollection.swift; sourceTree = "<group>"; };
 		2715CE981CB4C60900F1C01D /* PongGame.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PongGame.swift; sourceTree = "<group>"; };
 		2715CE9A1CB560CA00F1C01D /* PongDirectionProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PongDirectionProtocol.swift; sourceTree = "<group>"; };
-		2754BBD81CB80B4500513CC1 /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		278C52EF1CB5ACAB008A34FF /* PongBall.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PongBall.swift; sourceTree = "<group>"; };
 		278C52F11CB5B306008A34FF /* PongCollisionListenerProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PongCollisionListenerProtocol.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -86,7 +84,6 @@
 				2715CE831CB4C4EA00F1C01D /* Assets.xcassets */,
 				2715CE851CB4C4EA00F1C01D /* MainMenu.xib */,
 				2715CE881CB4C4EA00F1C01D /* Info.plist */,
-				2754BBD81CB80B4500513CC1 /* .gitignore */,
 			);
 			path = Pong;
 			sourceTree = "<group>";
@@ -149,7 +146,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2754BBD91CB80B4500513CC1 /* .gitignore in Resources */,
 				2715CE841CB4C4EA00F1C01D /* Assets.xcassets in Resources */,
 				2715CE821CB4C4EA00F1C01D /* PongScene.sks in Resources */,
 				2715CE871CB4C4EA00F1C01D /* MainMenu.xib in Resources */,
