@@ -23,6 +23,8 @@ class PongBall: PongEntity, PongSpriteNodeProtocol, PongCollisionListenerProtoco
 	
 	var node: SKSpriteNode?
 	
+	var outOfBounds: PongDirectionX = .None
+	
 	var angle: Double {
 		get {
 			return (node?.physicsBody?.velocity.toAngle())!
@@ -64,4 +66,22 @@ class PongBall: PongEntity, PongSpriteNodeProtocol, PongCollisionListenerProtoco
 	func didCollideWith(entity: PongEntity, contact: SKPhysicsContact) {
 		print("PongBall: didCollideWith: \(entity.name)")
 	}
+	
+	// Check out-of-bounds on update
+	override func update(currentTime: NSTimeInterval, forScene scene: SKScene) {
+		let position = node!.position
+		let sceneRect = scene.frame
+		if !CGRectContainsPoint(sceneRect, position) {
+			// out-of-bounds
+			// on whose side?
+			if position.x < 0 {
+				outOfBounds = .Left
+			} else if position.x > sceneRect.width {
+				outOfBounds = .Right
+			} else {
+				outOfBounds = .None
+			}
+		}
+	} // update
 }
+
