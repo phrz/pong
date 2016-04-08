@@ -6,6 +6,8 @@ class PongGame : NSObject, SKSceneDelegate {
 	var entities: PongEntityCollection
 	var scene: PongScene
 	
+	var serveDirection: PongDirectionX = .Right
+	
 	init(withScene scene: PongScene) {
 		self.scene = scene
 		self.entities = PongEntityCollection(withScene: self.scene)
@@ -16,8 +18,8 @@ class PongGame : NSObject, SKSceneDelegate {
 		entities.addEntity(PongPaddle(withScene: scene, startAt: .Right, name: "playerPaddle"))
 		entities.addEntity(PongPaddle(withScene: scene, startAt: .Left, name: "enemyPaddle"))
 		entities.addEntity(PongBall(withScene: scene, name: "ball"))
-		let ball = entities["ball"] as? PongBall
-		ball?.angle = 0*M_PI
+		
+		serve()
 	}
 	
 	// SKSceneDelegate
@@ -28,11 +30,26 @@ class PongGame : NSObject, SKSceneDelegate {
 	
 	func entitiesDidCollide(a: String, _ b: String, contact: SKPhysicsContact) {
 		print("PongGame: entitiesDidCollide: a:\(a), b:\(b)")
-		if let entityA = entities[a] as? PongCollisionListenerProtocol {
-			entityA.didCollideWith(entities[b]!,contact: contact)
+		
+		// Ensure that entities exist in the entity collection
+		// under the given keys
+		guard let entityA = entities[a] else {
+			print("Entity A named `\(a)` is unregistered in entity collection. Collision not reported.")
+			return
 		}
-		if let entityB = entities[b] as? PongCollisionListenerProtocol {
-			entityB.didCollideWith(entities[a]!,contact: contact)
+		guard let entityB = entities[b] else {
+			print("Entity B named `\(b)` is unregistered in entity collection. Collision not reported.")
+			return
+		}
+		
+		// If A is listening for collisions, notify it of collision with B.
+		if let entityA = entityA as? PongCollisionListenerProtocol {
+			entityA.didCollideWith(entityB, contact: contact)
+		}
+		
+		// If B is also listening for collisions, notify it of collision with A.
+		if let entityB = entityB as? PongCollisionListenerProtocol {
+			entityB.didCollideWith(entityA, contact: contact)
 		}
 	}
 	
@@ -47,6 +64,23 @@ class PongGame : NSObject, SKSceneDelegate {
 	func stopPlayerMovement() {
 		if var player = entities["playerPaddle"] as? PongDirectionProtocol {
 			player.direction = .None
+		}
+	}
+	
+	// Gameplay routines
+	
+	func serve() {
+		// Serve the ball to the last scorer (or the right for the first serve)
+		let ball = entities["ball"] as? PongBall
+		switch serveDirection {
+		case .Left:
+			ball?.angle = π
+			break
+		case .Right:
+			ball?.angle = 0
+			break
+		default:
+			print("Unspecified serve direction!")
 		}
 	}
 	

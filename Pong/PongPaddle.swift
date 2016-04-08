@@ -1,6 +1,8 @@
 import Foundation
 import SpriteKit
 
+let π = M_PI
+
 enum PongPaddlePosition {
 	case Left, Right
 }
@@ -12,6 +14,21 @@ class PongPaddle: PongEntity, PongSpriteNodeProtocol, PongDirectionProtocol, Pon
 	let defaultWidth: CGFloat = 10
 	let defaultHeight: CGFloat = 70
 	let padding: CGFloat = 50
+	
+	// For the angle that the ball reflects away at, we don't
+	// follow any physical standard. Instead, at the moment of
+	// collision with paddle, the centre Y position of the ball
+	// is subtracted by the paddle's centre Y to get Δy, which is
+	// a negative, positive, or zero scalar.
+	//
+	// The reflectiveRange property below, `R`, represents the highest
+	// or lowest point of the paddle with an angle change. It is a measure
+	// of scene-units away from the Y-centre of the paddle. Up until that
+	// distance, the angle of reflection will become more severe.
+	let reflectiveRange: CGFloat = 25
+	
+	let reflectiveAngleMax: Double = π/4 // 45° is the max reflection from
+	// the incoming incident angle, either positive or negative.
 	
 	var direction: PongDirection = .None
 	var velocityMultiplier: CGFloat = 300
@@ -54,10 +71,49 @@ class PongPaddle: PongEntity, PongSpriteNodeProtocol, PongDirectionProtocol, Pon
 	}
 	
 	func didCollideWith(entity: PongEntity, contact: SKPhysicsContact) {
+		
 		print("PongPaddle: didCollideWith: \(entity.name)")
+		
 		if entity.name == "ball" {
 			let ball = entity as! PongBall
-			ball.angle = ball.angle + M_PI
+			// Get the contact point Y (absolute in coord. system)
+			// Note: the actual SKPhysicsContact is not reliable for
+			// rectangle-to-rectangle collision. Instead, get the Y of
+			// the ball itself.
+			let absoluteY = ball.node!.position.y
+			
+			// Get the point Y relative to the paddle's anchor point
+			// (positive is above the center, negative is below
+			let relativeY = absoluteY - node!.position.y
+			
+			// The percent, positive (above) or negative (below) of reflection
+			// that should be imparted on the ball.
+			var reflectiveAngle = reflectiveAngleMax
+			
+			if abs(relativeY) > reflectiveRange {
+				// reflectionAmount can only be up to the max,
+				// so if the relativeY is outside of the range,
+				// just give the angle the right sign.
+				reflectiveAngle *= scalarUnit(Double(relativeY))
+			} else {
+				// otherwise calculate the ratio of the dy to the range
+				reflectiveAngle *= Double(relativeY / reflectiveRange)
+			}
+			
+			// Add π to vertically mirror the velocity angle,
+			// then subtract the reflective angle to represent
+			// the proper velocity y-component change
+			ball.angle += π - reflectiveAngle
+		}
+	}
+	
+	private func scalarUnit(num: Double) -> Double {
+		if num < 0 {
+			return -1
+		} else if num > 0 {
+			return 1
+		} else {
+			return 0
 		}
 	}
 	
