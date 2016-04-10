@@ -20,6 +20,10 @@
 		2715CE9B1CB560CA00F1C01D /* PongDirectionProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2715CE9A1CB560CA00F1C01D /* PongDirectionProtocol.swift */; };
 		278C52F01CB5ACAB008A34FF /* PongBall.swift in Sources */ = {isa = PBXBuildFile; fileRef = 278C52EF1CB5ACAB008A34FF /* PongBall.swift */; };
 		278C52F21CB5B306008A34FF /* PongCollisionListenerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 278C52F11CB5B306008A34FF /* PongCollisionListenerProtocol.swift */; };
+		27C84D711CBA14FC006D8FE4 /* ballHitPaddle.wav in Resources */ = {isa = PBXBuildFile; fileRef = 27C84D701CBA14FC006D8FE4 /* ballHitPaddle.wav */; };
+		27C84D731CBA1504006D8FE4 /* ballMiss.wav in Resources */ = {isa = PBXBuildFile; fileRef = 27C84D721CBA1504006D8FE4 /* ballMiss.wav */; };
+		27C84D751CBA1509006D8FE4 /* ballHitWall.wav in Resources */ = {isa = PBXBuildFile; fileRef = 27C84D741CBA1509006D8FE4 /* ballHitWall.wav */; };
+		27C84D771CBA1686006D8FE4 /* PongSoundManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27C84D761CBA1686006D8FE4 /* PongSoundManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +42,10 @@
 		2715CE9A1CB560CA00F1C01D /* PongDirectionProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PongDirectionProtocol.swift; sourceTree = "<group>"; };
 		278C52EF1CB5ACAB008A34FF /* PongBall.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PongBall.swift; sourceTree = "<group>"; };
 		278C52F11CB5B306008A34FF /* PongCollisionListenerProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PongCollisionListenerProtocol.swift; sourceTree = "<group>"; };
+		27C84D701CBA14FC006D8FE4 /* ballHitPaddle.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = ballHitPaddle.wav; sourceTree = "<group>"; };
+		27C84D721CBA1504006D8FE4 /* ballMiss.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = ballMiss.wav; sourceTree = "<group>"; };
+		27C84D741CBA1509006D8FE4 /* ballHitWall.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = ballHitWall.wav; sourceTree = "<group>"; };
+		27C84D761CBA1686006D8FE4 /* PongSoundManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PongSoundManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -74,6 +82,7 @@
 				2715CE8E1CB4C56900F1C01D /* PongScene.swift */,
 				2715CE941CB4C5C400F1C01D /* PongEntity.swift */,
 				2715CE981CB4C60900F1C01D /* PongGame.swift */,
+				27C84D761CBA1686006D8FE4 /* PongSoundManager.swift */,
 				2715CE951CB4C5C400F1C01D /* PongEntityCollection.swift */,
 				278C52F11CB5B306008A34FF /* PongCollisionListenerProtocol.swift */,
 				2715CE921CB4C59D00F1C01D /* PongPaddle.swift */,
@@ -82,6 +91,9 @@
 				2715CE9A1CB560CA00F1C01D /* PongDirectionProtocol.swift */,
 				2715CE811CB4C4EA00F1C01D /* PongScene.sks */,
 				2715CE831CB4C4EA00F1C01D /* Assets.xcassets */,
+				27C84D701CBA14FC006D8FE4 /* ballHitPaddle.wav */,
+				27C84D721CBA1504006D8FE4 /* ballMiss.wav */,
+				27C84D741CBA1509006D8FE4 /* ballHitWall.wav */,
 				2715CE851CB4C4EA00F1C01D /* MainMenu.xib */,
 				2715CE881CB4C4EA00F1C01D /* Info.plist */,
 			);
@@ -149,6 +161,9 @@
 				2715CE841CB4C4EA00F1C01D /* Assets.xcassets in Resources */,
 				2715CE821CB4C4EA00F1C01D /* PongScene.sks in Resources */,
 				2715CE871CB4C4EA00F1C01D /* MainMenu.xib in Resources */,
+				27C84D711CBA14FC006D8FE4 /* ballHitPaddle.wav in Resources */,
+				27C84D731CBA1504006D8FE4 /* ballMiss.wav in Resources */,
+				27C84D751CBA1509006D8FE4 /* ballHitWall.wav in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -163,6 +178,7 @@
 				2715CE911CB4C59400F1C01D /* PongSpriteNodeProtocol.swift in Sources */,
 				2715CE961CB4C5C400F1C01D /* PongEntity.swift in Sources */,
 				2715CE971CB4C5C400F1C01D /* PongEntityCollection.swift in Sources */,
+				27C84D771CBA1686006D8FE4 /* PongSoundManager.swift in Sources */,
 				278C52F21CB5B306008A34FF /* PongCollisionListenerProtocol.swift in Sources */,
 				2715CE931CB4C59D00F1C01D /* PongPaddle.swift in Sources */,
 				2715CE9B1CB560CA00F1C01D /* PongDirectionProtocol.swift in Sources */,

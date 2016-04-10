@@ -35,6 +35,7 @@ class PongBall: PongEntity, PongSpriteNodeProtocol, PongCollisionListenerProtoco
 	}
 	
 	init(withScene scene: SKScene, name: String) {
+		
 		super.init(withName: name)
 		
 		// Create the ball sprite
@@ -59,16 +60,27 @@ class PongBall: PongEntity, PongSpriteNodeProtocol, PongCollisionListenerProtoco
 		
 		// Collision/contact rules
 		node!.physicsBody?.categoryBitMask = PhysicsCategory.ball
-		node!.physicsBody?.collisionBitMask = PhysicsCategory.scene
+		node!.physicsBody?.collisionBitMask = 0
 		node!.physicsBody?.contactTestBitMask = PhysicsCategory.scene | PhysicsCategory.paddle
 	}
 	
 	func didCollideWith(entity: PongEntity, contact: SKPhysicsContact) {
 		print("PongBall: didCollideWith: \(entity.name)")
+		
+		if(entity.name == "pongScene") {
+			print("PongBall: scene collision handler")
+			didCollideWithScene()
+		}
 	}
 	
-	// Check out-of-bounds on update
+	func didCollideWithScene() {
+		// reflect the incident angle of the ball (this formula is for
+		// horizontal walls)
+		self.angle = -self.angle
+	}
+	
 	override func update(currentTime: NSTimeInterval, forScene scene: SKScene) {
+		// Check out-of-bounds on update
 		let position = node!.position
 		let sceneRect = scene.frame
 		if !CGRectContainsPoint(sceneRect, position) {

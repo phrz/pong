@@ -15,6 +15,8 @@ class PongPaddle: PongEntity, PongSpriteNodeProtocol, PongDirectionProtocol, Pon
 	let defaultHeight: CGFloat = 70
 	let padding: CGFloat = 50
 	
+	let position: PongPaddlePosition
+
 	// For the angle that the ball reflects away at, we don't
 	// follow any physical standard. Instead, at the moment of
 	// collision with paddle, the centre Y position of the ball
@@ -27,13 +29,15 @@ class PongPaddle: PongEntity, PongSpriteNodeProtocol, PongDirectionProtocol, Pon
 	// distance, the angle of reflection will become more severe.
 	let reflectiveRange: CGFloat = 25
 	
-	let reflectiveAngleMax: Double = π/4 // 45° is the max reflection from
+	let reflectiveAngleMax: Double = π/5 // the max reflection from
 	// the incoming incident angle, either positive or negative.
 	
 	var direction: PongDirection = .None
-	var velocityMultiplier: CGFloat = 300
+	var velocityMultiplier: CGFloat = 500
 	
 	init(withScene scene: SKScene, startAt position: PongPaddlePosition, name: String) {
+		
+		self.position = position
 		
 		super.init(withName: name)
 		
@@ -103,7 +107,14 @@ class PongPaddle: PongEntity, PongSpriteNodeProtocol, PongDirectionProtocol, Pon
 			// Add π to vertically mirror the velocity angle,
 			// then subtract the reflective angle to represent
 			// the proper velocity y-component change
-			ball.angle += π - reflectiveAngle
+			switch position {
+			case .Left:
+				ball.angle += π + 2 * reflectiveAngle
+				break
+			case .Right:
+				ball.angle += π - reflectiveAngle
+				break
+			}
 		}
 	}
 	
