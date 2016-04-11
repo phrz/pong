@@ -35,7 +35,6 @@ class PongGame : NSObject, SKSceneDelegate {
 	var serveDirection: PongDirectionX = .Right
 	var shouldHandleOutOfBounds = true
 	
-	
 	// Score tracking and display
 	var _playerScore = 0
 	var _enemyScore = 0
@@ -79,9 +78,22 @@ class PongGame : NSObject, SKSceneDelegate {
 		super.init()
 		self.scene.delegate = self
 		
-		entities.addEntity(PongPaddle(withScene: scene, startAt: .Right, name: "playerPaddle"))
-		entities.addEntity(PongPaddle(withScene: scene, startAt: .Left, name: "enemyPaddle"))
-		entities.addEntity(PongBall(withScene: scene, name: "ball"))
+		// Add the paddles
+		let playerPaddle = PongPaddle(withScene: scene, startAt: .Right,
+		                              name: "playerPaddle")
+		entities.addEntity(playerPaddle)
+		
+		let enemyPaddle = PongPaddle(withScene: scene, startAt: .Left,
+		                             name: "enemyPaddle")
+		entities.addEntity(enemyPaddle)
+		
+		// the ball
+		let ball = PongBall(withScene: scene, name: "ball")
+		entities.addEntity(ball)
+		
+		// Add the AI
+		entities.addEntity(PongBasicPlayer(paddle: enemyPaddle, ball: ball,
+										   name: "computer"))
 		
 		// dummy entity for the scene so collisions with it get reported
 		// to the other entity
@@ -220,7 +232,7 @@ class PongGame : NSObject, SKSceneDelegate {
 			
 			// Now deviate the angle of the serve (0...π/3)
 			let randomRatioForAngle = Double(arc4random()) / Double(UINT32_MAX)
-			let angleDeviationMax: Double = π / 3
+			let angleDeviationMax: Double = 2 * π / 5
 			angleDeviation = angleDeviationMax * randomRatioForAngle - (0.5*angleDeviationMax)
 		}
 		

@@ -59,6 +59,8 @@ class PongPaddle: PongEntity, PongSpriteNodeProtocol, PongDirectionProtocol, Pon
 			                         y: scene.frame.midY)
 		}
 		
+		
+		
 		// Physics properties
 		node!.physicsBody = SKPhysicsBody(rectangleOfSize: node!.frame.size, center: CGPointZero)
 		node!.physicsBody?.affectedByGravity = false
