@@ -101,13 +101,12 @@ class PongPaddle: PongEntity, PongSpriteNodeProtocol, PongDirectionProtocol, Pon
 			// do nothing (allow pass-through) - this avoids the issue of
 			// the ball hitting the sides, corners, or even the back of
 			// the paddle
-			let ballX = ball.node!.position.x
 			let centre = ball.node!.scene!.frame.midX
 			
-			let ballFromCentre = abs(centre - ballX)
+			let ballFromCentre = abs(centre - ball.trailingEdge)
 			let leadingEdgeFromCentre = abs(centre - self.leadingX)
 			
-			if(ballFromCentre > leadingEdgeFromCentre) {
+			if(ballFromCentre - 1 > leadingEdgeFromCentre) {
 				return
 			}
 			

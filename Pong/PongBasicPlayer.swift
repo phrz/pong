@@ -17,7 +17,7 @@ class PongBasicPlayer: PongEntity {
 	let ballYDelay: PongSignalDelay<CGFloat>
 	
 	// Chance that, if moving, AI will continue to move.
-	let persistenceProbability = 50
+	let persistenceProbability = 0
 	
 	init(paddle: PongPaddle, ball: PongBall, name: String) {
 		self.ball = ball
@@ -58,7 +58,7 @@ class PongBasicPlayer: PongEntity {
 		}
 		
 		// There is a chance that movement will persist
-		if(decisionState != .None && Int(arc4random_uniform(100)) > persistenceProbability) {
+		if(decisionState != .None && Int(arc4random_uniform(100)) < persistenceProbability) {
 			print("persist")
 			return decisionState
 		}

@@ -34,6 +34,20 @@ class PongBall: PongEntity, PongSpriteNodeProtocol, PongCollisionListenerProtoco
 		}
 	}
 	
+	var trailingEdge: CGFloat {
+		get {
+			let vx = self.node!.physicsBody!.velocity.dx
+			let minX = self.node!.frame.minX
+			let maxX = self.node!.frame.maxX
+			// If we're going left, left edge is trailing
+			if(vx < 0) {
+				return minX
+			} else {
+				return maxX
+			}
+		}
+	}
+	
 	init(withScene scene: SKScene, name: String) {
 		
 		super.init(withName: name)
