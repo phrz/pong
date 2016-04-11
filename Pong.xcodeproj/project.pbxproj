@@ -88,10 +88,8 @@
 				2731B37F1CBB489100B36246 /* Entity & Component */,
 				2731B3811CBB48BD00B36246 /* Gameplay Elements */,
 				2731B3841CBB4A7F00B36246 /* AIs */,
+				27EBFA7C1CBBF5450090E31E /* Sounds */,
 				2715CE831CB4C4EA00F1C01D /* Assets.xcassets */,
-				27C84D701CBA14FC006D8FE4 /* ballHitPaddle.wav */,
-				27C84D721CBA1504006D8FE4 /* ballMiss.wav */,
-				27C84D741CBA1509006D8FE4 /* ballHitWall.wav */,
 				2715CE851CB4C4EA00F1C01D /* MainMenu.xib */,
 				2715CE881CB4C4EA00F1C01D /* Info.plist */,
 			);
@@ -139,6 +137,16 @@
 				2731B3861CBB58B900B36246 /* PongSignalDelay.swift */,
 			);
 			name = AIs;
+			sourceTree = "<group>";
+		};
+		27EBFA7C1CBBF5450090E31E /* Sounds */ = {
+			isa = PBXGroup;
+			children = (
+				27C84D701CBA14FC006D8FE4 /* ballHitPaddle.wav */,
+				27C84D721CBA1504006D8FE4 /* ballMiss.wav */,
+				27C84D741CBA1509006D8FE4 /* ballHitWall.wav */,
+			);
+			name = Sounds;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

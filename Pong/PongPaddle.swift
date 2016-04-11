@@ -16,6 +16,20 @@ class PongPaddle: PongEntity, PongSpriteNodeProtocol, PongDirectionProtocol, Pon
 	let padding: CGFloat = 50
 	
 	let position: PongPaddlePosition
+	
+	var leadingX: CGFloat {
+		get {
+			let rect = self.node!.frame
+			switch self.position {
+			case .Left:
+				// leading edge is right edge
+				return rect.maxX
+			case .Right:
+				// leading edge is left edge
+				return rect.minX
+			}
+		}
+	}
 
 	// For the angle that the ball reflects away at, we don't
 	// follow any physical standard. Instead, at the moment of
@@ -82,6 +96,21 @@ class PongPaddle: PongEntity, PongSpriteNodeProtocol, PongDirectionProtocol, Pon
 		
 		if entity.name == "ball" {
 			let ball = entity as! PongBall
+			
+			// If the ball's X is behind the leading edge of the paddle,
+			// do nothing (allow pass-through) - this avoids the issue of
+			// the ball hitting the sides, corners, or even the back of
+			// the paddle
+			let ballX = ball.node!.position.x
+			let centre = ball.node!.scene!.frame.midX
+			
+			let ballFromCentre = abs(centre - ballX)
+			let leadingEdgeFromCentre = abs(centre - self.leadingX)
+			
+			if(ballFromCentre > leadingEdgeFromCentre) {
+				return
+			}
+			
 			// Get the contact point Y (absolute in coord. system)
 			// Note: the actual SKPhysicsContact is not reliable for
 			// rectangle-to-rectangle collision. Instead, get the Y of

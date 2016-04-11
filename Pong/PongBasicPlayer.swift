@@ -5,21 +5,25 @@ class PongBasicPlayer: PongEntity {
 	let ball: PongBall
 	let paddle: PongPaddle
 	
-	// To prevent excessive calculation, we limit decisions to 10x/s
-	let movementDecisionInterval: NSTimeInterval = 1.0/10
 	var nextDecisionTime: NSTimeInterval = 0.0
+	let noneDecisionInterval: NSTimeInterval = 1.0/20
+	let moveDecisionInterval: NSTimeInterval = 1.0/10
 	
 	// Maintain prior decision state
 	var decisionState: PongDirection = .None
 	
 	// Reaction time is emulated by imposing latency on the ball position
+	let delayTime = 1.0
 	let ballYDelay: PongSignalDelay<CGFloat>
+	
+	// Chance that, if moving, AI will continue to move.
+	let persistenceProbability = 50
 	
 	init(paddle: PongPaddle, ball: PongBall, name: String) {
 		self.ball = ball
 		self.paddle = paddle
 		
-		self.ballYDelay = PongSignalDelay<CGFloat>(delay: 1) {
+		self.ballYDelay = PongSignalDelay<CGFloat>(delay: delayTime) {
 			return ball.node!.position.y
 		}
 		
@@ -35,6 +39,7 @@ class PongBasicPlayer: PongEntity {
 		// if the ball is travelling right, stay still
 		if ball.node!.physicsBody!.velocity.dx > 0 {
 			decisionState = .None
+			nextDecisionTime = time + noneDecisionInterval
 			return decisionState
 		}
 		
@@ -42,6 +47,7 @@ class PongBasicPlayer: PongEntity {
 		// AI is "blind" to it
 		if ball.node!.position.x > ball.node!.scene!.frame.midX {
 			decisionState = .None
+			nextDecisionTime = time + noneDecisionInterval
 			return decisionState
 		}
 		
@@ -51,32 +57,39 @@ class PongBasicPlayer: PongEntity {
 			return decisionState
 		}
 		
+		// There is a chance that movement will persist
+		if(decisionState != .None && Int(arc4random_uniform(100)) > persistenceProbability) {
+			print("persist")
+			return decisionState
+		}
+		
 		let top = self.paddle.node!.frame.maxY
 		let bottom = self.paddle.node!.frame.minY
 		
-		// Change the next decision time to the current time plus
-		// the decision interval constant.
-		nextDecisionTime = time + movementDecisionInterval
-		
 		// Move towards the Y position of the ball
-		let ballY = ball.node!.position.y
+		// (We use a delayed value for reaction time)
+		guard let ballY = ballYDelay.get() else {
+			decisionState = .None
+			nextDecisionTime = time + noneDecisionInterval
+			return decisionState
+		}
 		
-		print("Ball Y:        \(ballY)")
-		print("Ball Y (delay: \(ballYDelay.get())")
+		// Jitter function (optional)
+//		ballY += CGFloat(arc4random_uniform(30))
+		
 		
 		if(ballY >= bottom && ballY <= top) {
 			// within paddle range
 			decisionState = .None
-		}
-		
-		else if(ballY < bottom) {
+			nextDecisionTime = time + noneDecisionInterval
+		} else if(ballY < bottom) {
 			// below paddle
 			decisionState = .Down
-		}
-		
-		else if(ballY > top) {
+			nextDecisionTime = time + moveDecisionInterval
+		} else if(ballY > top) {
 			// above paddle
 			decisionState = .Up
+			nextDecisionTime = time + moveDecisionInterval
 		}
 		
 		return decisionState

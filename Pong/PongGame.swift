@@ -85,6 +85,7 @@ class PongGame : NSObject, SKSceneDelegate {
 		
 		let enemyPaddle = PongPaddle(withScene: scene, startAt: .Left,
 		                             name: "enemyPaddle")
+		enemyPaddle.velocityMultiplier /= 2
 		entities.addEntity(enemyPaddle)
 		
 		// the ball
