@@ -1,6 +1,6 @@
 import SpriteKit
 
-class PongBasicPlayer: PongEntity {
+class PongBasicPlayer: PongEntity, PongPlayerProtocol {
 	
 	let ball: PongBall
 	let paddle: PongPaddle
@@ -17,7 +17,7 @@ class PongBasicPlayer: PongEntity {
 	let ballYDelay: PongSignalDelay<CGFloat>
 	
 	// Chance that, if moving, AI will continue to move.
-	let persistenceProbability = 0
+	let persistenceProbability = 10
 	
 	init(paddle: PongPaddle, ball: PongBall, name: String) {
 		self.ball = ball
@@ -28,11 +28,6 @@ class PongBasicPlayer: PongEntity {
 		}
 		
 		super.init(withName: name)
-	}
-	
-	override func update(currentTime: NSTimeInterval, forScene scene: SKScene) {
-		let direction: PongDirection = strategy(currentTime)
-		paddle.direction = direction
 	}
 	
 	func strategy(time: NSTimeInterval) -> PongDirection {

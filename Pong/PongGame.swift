@@ -78,23 +78,21 @@ class PongGame : NSObject, SKSceneDelegate {
 		super.init()
 		self.scene.delegate = self
 		
-		// Add the paddles
-		let playerPaddle = PongPaddle(withScene: scene, startAt: .Right,
-		                              name: "playerPaddle")
-		entities.addEntity(playerPaddle)
-		
-		let enemyPaddle = PongPaddle(withScene: scene, startAt: .Left,
-		                             name: "enemyPaddle")
-		enemyPaddle.velocityMultiplier *= 0.75
-		entities.addEntity(enemyPaddle)
-		
 		// the ball
 		let ball = PongBall(withScene: scene, name: "ball")
 		entities.addEntity(ball)
+
+		// Add the paddles
+		let playerPaddle = PongPaddle(withScene: scene, startAt: .Right, name: "playerPaddle")
+		entities.addEntity(playerPaddle)
 		
+		let enemyPaddle = PongPaddle(withScene: scene, startAt: .Left, name: "enemyPaddle")
 		// Add the AI
-		entities.addEntity(PongBasicPlayer(paddle: enemyPaddle, ball: ball,
-										   name: "computer"))
+		let computerPlayer = PongTrigPlayer(paddle: enemyPaddle, ball: ball, name: "computer")
+		entities.addEntity(computerPlayer)
+		enemyPaddle.velocityMultiplier *= 0.5
+		enemyPaddle.player = computerPlayer
+		entities.addEntity(enemyPaddle)
 		
 		// dummy entity for the scene so collisions with it get reported
 		// to the other entity
@@ -107,6 +105,10 @@ class PongGame : NSObject, SKSceneDelegate {
 	
 	func update(currentTime: NSTimeInterval, forScene scene: SKScene) {
 		entities.update(currentTime, forScene: scene)
+		
+		let ai = entities["computer"] as! PongPlayerProtocol
+		let enemyPaddle = entities["enemyPaddle"] as! PongPaddle
+		enemyPaddle.direction = ai.strategy(currentTime)
 	}
 	
 	func didFinishUpdateForScene(scene: SKScene) {

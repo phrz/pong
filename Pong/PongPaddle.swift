@@ -15,6 +15,8 @@ class PongPaddle: PongEntity, PongSpriteNodeProtocol, PongDirectionProtocol, Pon
 	let defaultHeight: CGFloat = 70
 	let padding: CGFloat = 50
 	
+	var player: PongPlayerProtocol?
+	
 	let position: PongPaddlePosition
 	
 	var leadingX: CGFloat {
@@ -96,19 +98,6 @@ class PongPaddle: PongEntity, PongSpriteNodeProtocol, PongDirectionProtocol, Pon
 		
 		if entity.name == "ball" {
 			let ball = entity as! PongBall
-			
-			// If the ball's X is behind the leading edge of the paddle,
-			// do nothing (allow pass-through) - this avoids the issue of
-			// the ball hitting the sides, corners, or even the back of
-			// the paddle
-			let centre = ball.node!.scene!.frame.midX
-			
-			let ballFromCentre = abs(centre - ball.trailingEdge)
-			let leadingEdgeFromCentre = abs(centre - self.leadingX)
-			
-			if(ballFromCentre - 1 > leadingEdgeFromCentre) {
-				return
-			}
 			
 			// Get the contact point Y (absolute in coord. system)
 			// Note: the actual SKPhysicsContact is not reliable for

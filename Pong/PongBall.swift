@@ -27,7 +27,8 @@ class PongBall: PongEntity, PongSpriteNodeProtocol, PongCollisionListenerProtoco
 	
 	var angle: Double {
 		get {
-			return (node?.physicsBody?.velocity.toAngle())!
+			var a = (node?.physicsBody?.velocity.toAngle())!
+			return a
 		}
 		set(newAngle) {
 			node?.physicsBody?.velocity = CGVector.from(magnitude: speedConstant, angle: newAngle)
