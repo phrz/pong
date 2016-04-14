@@ -27,7 +27,7 @@ class PongBall: PongEntity, PongSpriteNodeProtocol, PongCollisionListenerProtoco
 	
 	var angle: Double {
 		get {
-			var a = (node?.physicsBody?.velocity.toAngle())!
+			let a = (node?.physicsBody?.velocity.toAngle())!
 			return a
 		}
 		set(newAngle) {

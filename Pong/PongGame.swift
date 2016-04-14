@@ -88,6 +88,7 @@ class PongGame : NSObject, SKSceneDelegate {
 		
 		let enemyPaddle = PongPaddle(withScene: scene, startAt: .Left, name: "enemyPaddle")
 		// Add the AI
+//		let computerPlayer = PongBasicPlayer(paddle: enemyPaddle, ball: ball, name: "computer")
 		let computerPlayer = PongTrigPlayer(paddle: enemyPaddle, ball: ball, name: "computer")
 		entities.addEntity(computerPlayer)
 		enemyPaddle.velocityMultiplier *= 0.5
